@@ -8,8 +8,7 @@ export function fetchCountries(name) {
   ).then(response => {
     if (!response.ok) {
       Notify.failure('Oops, there is no country with that name');
-      countryInfo.innerHTML = '';
-      countryList.innerHTML = '';
+      clearMarkup();
     }
     return response.json();
   });

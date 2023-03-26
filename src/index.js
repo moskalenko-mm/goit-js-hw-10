@@ -17,8 +17,7 @@ function handleInput(event) {
         Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
-        countryInfo.innerHTML = '';
-        countryList.innerHTML = '';
+        clearMarkup();
       } else if (name.length === 1) {
         renderCountryInfo(name);
       } else if (name.length > 1 && name.length < 11) {
@@ -61,5 +60,10 @@ function renderCountryInfo(name) {
     })
     .join('');
   countryInfo.innerHTML = markup;
+  countryList.innerHTML = '';
+}
+
+function clearMarkup() {
+  countryInfo.innerHTML = '';
   countryList.innerHTML = '';
 }
