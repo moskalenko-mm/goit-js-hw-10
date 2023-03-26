@@ -11,18 +11,21 @@ const countryInfo = document.querySelector('.country-info');
 searchBox.addEventListener('input', debounce(handleInput, DEBOUNCE_DELAY));
 function handleInput(event) {
   event.preventDefault();
-  fetchCountries(event.target.value.trim()).then(name => {
-    console.log(name);
-    if (name.length > 10) {
-      Notify.info('Too many matches found. Please enter a more specific name.');
-      countryInfo.innerHTML = '';
-      countryList.innerHTML = '';
-    } else if (name.length === 1) {
-      renderCountryInfo(name);
-    } else if (name.length > 1 && name.length < 11) {
-      renderCountryList(name);
-    }
-  });
+  if (event.target.value.trim() !== '') {
+    fetchCountries(event.target.value.trim()).then(name => {
+      if (name.length > 10) {
+        Notify.info(
+          'Too many matches found. Please enter a more specific name.'
+        );
+        countryInfo.innerHTML = '';
+        countryList.innerHTML = '';
+      } else if (name.length === 1) {
+        renderCountryInfo(name);
+      } else if (name.length > 1 && name.length < 11) {
+        renderCountryList(name);
+      }
+    });
+  }
 }
 function renderCountryList(name) {
   const markup = name
